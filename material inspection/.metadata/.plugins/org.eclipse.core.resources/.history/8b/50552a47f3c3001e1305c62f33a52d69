@@ -1,0 +1,5 @@
+package com.zettamine.mi.service;
+
+public interface MaterialService {
+
+}

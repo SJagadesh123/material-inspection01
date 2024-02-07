@@ -1,0 +1,14 @@
+package com.zettamine.mi.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class HomePageController {
+	
+	public String forwardVendor(Model model)
+	{
+		return "vendor";
+	}
+
+}

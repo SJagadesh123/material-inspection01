@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+
+
+  body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #000080;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           
+        }
+
+        #logo {
+            margin-right: auto;
+        }
+
+        #home-logout {
+            margin-left: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        

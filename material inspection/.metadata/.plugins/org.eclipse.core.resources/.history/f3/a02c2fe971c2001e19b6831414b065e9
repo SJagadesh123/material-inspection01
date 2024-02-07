@@ -1,0 +1,9 @@
+package com.zettamine.mi.entities;
+
+public class MaterialCharacteristic {
+
+	private String chDesc;
+	private String uom;
+	private double upperLimit;
+	private double lowerLimit;
+}

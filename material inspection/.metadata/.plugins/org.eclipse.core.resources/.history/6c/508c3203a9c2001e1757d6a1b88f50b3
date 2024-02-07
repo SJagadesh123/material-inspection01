@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/home-style.css">
+    <title>Home Page</title>
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">Hello ${user.userName.toUpperCase()}</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="add-amc.jsp" class="card-link">Vendor</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="add-loc.jsp" class="card-link">Plant</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="search-amc.jsp" class="card-link">Material</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="search-amc.jsp" class="card-link">Material Inspection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap JavaScript components) -->
+    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

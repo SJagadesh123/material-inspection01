@@ -1,0 +1,29 @@
+package com.zettamine.mi.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.zettamine.mi.entities.Vendor;
+
+@Controller
+@RequestMapping("/material-inspection/vendor")
+public class VendorController {
+	
+	@GetMapping("/new")
+	public String getNewVendor(Model model)
+	{
+		model.addAttribute("vendor", new Vendor());
+		
+		return "add-vendor";
+	}
+	
+	@PostMapping("/add-vendor")
+	public String addVendor(Model model)
+	{
+		return "vendor";
+	}
+
+}

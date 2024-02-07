@@ -1,0 +1,27 @@
+package com.zettamine.mi.service;
+
+import java.util.List;
+
+import com.zettamine.mi.entities.Plant;
+
+public class PlantServiceImpl implements PlantService {
+
+	@Override
+	public void save(Plant plant) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Plant> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Plant getByPlantId(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

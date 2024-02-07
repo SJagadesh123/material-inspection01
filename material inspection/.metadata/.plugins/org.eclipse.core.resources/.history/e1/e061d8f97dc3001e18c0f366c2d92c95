@@ -1,0 +1,46 @@
+package com.zettamine.mi.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.zettamine.mi.entities.Material;
+import com.zettamine.mi.entities.Plant;
+
+@Controller
+@RequestMapping("/material-inspection/plant")
+public class MaterialController {
+
+	@GetMapping("/new")
+	public String getNewPlant(Model model)
+	{
+		model.addAttribute("material", new Material());
+		
+		return "add-material";
+	}
+	
+	@PostMapping({"/add-plant","/edit/add-plant"})
+	public String addPlant(Plant plant,Model model)
+	{
+		System.out.println(plant);
+		
+		//plantService.save(plant);
+		
+		return "plant";
+	}
+	
+	@GetMapping("/search")
+	public String getShowAll(Model model)
+	{
+		
+		//List<Plant> allPlants = plantService.getAll();
+		
+		//model.addAttribute("allPlants", allPlants);
+		
+		return "show-plant";
+	}
+}

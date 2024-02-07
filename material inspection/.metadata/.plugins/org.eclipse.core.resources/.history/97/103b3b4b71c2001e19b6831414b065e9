@@ -1,0 +1,8 @@
+package com.zettamine.mi.entities;
+
+public class Material {
+
+	private String materialId;
+	private String description;
+	private String materialType;
+}

@@ -1,0 +1,17 @@
+spring:
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: 1234
+    url: jdbc:postgresql://localhost:5432/material_inspection
+    username: postgres
+    
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

@@ -1,0 +1,24 @@
+package com.zettamine.mi.service;
+
+import com.zettamine.mi.entities.Users;
+import com.zettamine.mi.repository.UsersRepository;
+
+public class UserServiceImpl implements UserService {
+
+	private UsersRepository usersRepo;
+	
+	
+	public UserServiceImpl(UsersRepository usersRepo) {
+		this.usersRepo = usersRepo;
+	}
+
+
+	@Override
+	public boolean validateUser(Users user) {
+		
+		usersRepo.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		
+		return false;
+	}
+
+}

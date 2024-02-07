@@ -1,0 +1,40 @@
+package com.zettamine.mi.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.zettamine.mi.entities.InspectionLot;
+import com.zettamine.mi.repository.InspectionLotRepository;
+
+@Service
+public class InspectionLotServiceImpl implements InspectionLotService {
+
+	private InspectionLotRepository inspectionLotRepo;
+	
+	
+	
+	public InspectionLotServiceImpl(InspectionLotRepository inspectionLotRepo) {
+		super();
+		this.inspectionLotRepo = inspectionLotRepo;
+	}
+
+	@Override
+	public void save(InspectionLot inspectionLot) {
+		
+		inspectionLotRepo.save(inspectionLot);
+	}
+
+	@Override
+	public List<InspectionLot> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InspectionLot getByLotId(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,28 @@
+/* home-style.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.card {
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-link {
+    display: block;
+    padding: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card-link:hover {
+    background-color: #f4f4f4;
+    text-decoration: none;
+}

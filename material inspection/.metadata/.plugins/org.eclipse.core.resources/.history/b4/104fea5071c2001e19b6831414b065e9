@@ -1,0 +1,11 @@
+package com.zettamine.mi.entities;
+
+import jakarta.persistence.Id;
+
+public class Material {
+
+	@Id
+	private String materialId;
+	private String description;
+	private String materialType;
+}

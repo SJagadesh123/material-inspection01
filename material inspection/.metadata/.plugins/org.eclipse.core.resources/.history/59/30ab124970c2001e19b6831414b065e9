@@ -1,0 +1,9 @@
+package com.zettamine.mi.entities;
+
+public class Plant {
+
+	private Integer plantId;
+	private String plantName;
+	private String city;
+	private String state;
+}

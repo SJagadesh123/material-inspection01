@@ -1,0 +1,55 @@
+package com.zettamine.mi.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.zettamine.mi.entities.Material;
+
+@Controller
+@RequestMapping("/material-inspection/material")
+public class MaterialController {
+
+	@GetMapping("/new")
+	public String getNewMaterial(Model model) {
+		model.addAttribute("material", new Material());
+
+		return "add-material";
+	}
+
+	@PostMapping({ "/add-material", "/edit/add-material" })
+	public String addMaterial(Material material, RedirectAttributes redirectAttributes) {
+		System.out.println(material);
+
+
+		return "material";
+	}
+
+	@GetMapping("/addCharacteristic")
+	public String showCharacteristicForm(Model model) {
+		return "addCharacteristic";
+	}
+
+	@PostMapping("/addCharacteristic")
+	public String addCharacteristic(@ModelAttribute("material") Material material) {
+		// Process characteristic data (save to database, etc.)
+		System.out.println(material);
+		return "redirect:/success"; // Redirect to a success page
+	}
+
+	@GetMapping("/search")
+	public String getShowAll(Model model) {
+
+		// List<Plant> allPlants = plantService.getAll();
+
+		// model.addAttribute("allPlants", allPlants);
+
+		return "show-material";
+	}
+}

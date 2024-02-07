@@ -1,0 +1,36 @@
+package com.zettamine.mi.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/material-inspection")
+public class HomePageController {
+	
+	@GetMapping("/vendor")
+	public String forwardToVendor(Model model)
+	{
+		return "vendor";
+	}
+	
+	@GetMapping("/vendor")
+	public String forwardToPlant(Model model)
+	{
+		return "vendor";
+	}
+	
+	@GetMapping("/vendor")
+	public String forwardToVendorMaterial(Model model)
+	{
+		return "vendor";
+	}
+	
+	@GetMapping("/vendor")
+	public String forwardVendor(Model model)
+	{
+		return "vendor";
+	}
+
+}

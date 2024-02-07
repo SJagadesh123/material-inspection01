@@ -1,0 +1,12 @@
+package com.zettamine.mi.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class UserController {
+
+	public String userLogin()
+	{
+		return "home";
+	}
+}

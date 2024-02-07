@@ -1,0 +1,9 @@
+package com.zettamine.mi.repository;
+
+import java.io.Serializable;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UsersRepository implements JpaRepository<Users, Serializable> {
+
+}

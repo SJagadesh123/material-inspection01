@@ -1,0 +1,11 @@
+spring.mvc.view.prefix=/views/
+spring.mvc.view.suffix=.jsp
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/material_insp
+spring.datasource.username=postgres
+spring.datasource.password=1234
+
+logging.level.root=debug
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update

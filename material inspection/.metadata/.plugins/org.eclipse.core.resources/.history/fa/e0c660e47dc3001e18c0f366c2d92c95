@@ -1,0 +1,10 @@
+package com.zettamine.mi.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/material-inspection/plant")
+public class MaterialController {
+
+}

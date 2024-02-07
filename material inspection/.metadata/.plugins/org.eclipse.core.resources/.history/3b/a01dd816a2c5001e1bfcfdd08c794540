@@ -1,0 +1,22 @@
+package com.zettamine.mi.service;
+
+import com.zettamine.mi.entities.InspectionActual;
+import com.zettamine.mi.repository.InspectionActualRepository;
+
+public class InspectionActualsServiceImpl implements InspectionActualService {
+
+	private InspectionActualRepository inspectionActualRepo;
+	
+	@Override
+	public void save(InspectionActual inspectionActual) {
+		
+		
+	}
+
+	@Override
+	public InspectionActual getByLotId(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
