@@ -36,7 +36,7 @@
 			<c:forEach var="inspActuals" items="${inspActuals}">
 
 			<tr>	
-				<td>${chDesc}</td>		
+				<td>${inspActuals.getMaterialCharacteristic().chDesc}</td>		
 				<td>${uom}</td>
 				<td>${inspActuals.maxMeasurement}</td>
 				<td>${inspActuals.minMeasurement}</td>

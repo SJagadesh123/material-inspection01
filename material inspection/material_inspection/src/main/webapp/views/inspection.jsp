@@ -21,9 +21,9 @@
 <br>
 	<ul>
 		<li><a href="/material-inspection/inspection/new">Add Lot</a></li>
-		<li><a href="/material-inspection/inspection/start-isp">Show All</a></li>
 		<li><a href="/material-inspection/inspection/process-isp">Process Inspection</a></li>
-		<li><a href="/material-inspection/inspection/results">Provide Results</a></li>
+		<li><a href="/material-inspection/inspection/pending">Approval Pending</a></li>
+		<li><a href="/material-inspection/inspection/results">Completed</a></li>
 	</ul>
 
 </body>

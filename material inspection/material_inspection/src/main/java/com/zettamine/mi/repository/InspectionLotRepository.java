@@ -12,4 +12,8 @@ public interface InspectionLotRepository extends JpaRepository<InspectionLot, Se
 
 	@Query(value = "select * from isp_lot where insp_end_date is null",nativeQuery = true)
 	List<InspectionLot> getLotForProcess();
+	
+	
+	
+	
 }

@@ -88,9 +88,8 @@ public class InspectionLotController {
 	public String processInspection(Model model) {
 		List<InspectionLot> inspectionLotForProccess = inspectionLotService.getInspectionLotForProccess();
 
-		
 		model.addAttribute("inspection", inspectionLotForProccess);
-		//model.addAttribute("size", size);
+		// model.addAttribute("size", size);
 
 		return "process-isp";
 	}
@@ -125,16 +124,23 @@ public class InspectionLotController {
 	public String viewActuals(@PathVariable("id") Integer id, Model model) {
 		List<InspectionActual> inspActuals = inspectionActualService.getByInspectionId(id);
 
-		String chDesc = inspActuals.get(0).getMaterialCharacteristic().getChDesc();
 		String uom = inspActuals.get(0).getMaterialCharacteristic().getUom();
 
-		System.out.println(chDesc);
-
 		model.addAttribute("inspActuals", inspActuals);
-		model.addAttribute("chDesc", chDesc);
 		model.addAttribute("uom", uom);
 
 		return "show-actuals";
+	}
+
+	@GetMapping("/results")
+	public String getCompletedLot(Model model) {
+		List<InspectionLot> inspectionLotForProccess = inspectionLotService.getCompleted();
+
+		System.out.println(inspectionLotForProccess);
+		
+		model.addAttribute("inspection", inspectionLotForProccess);
+
+		return "show-results";
 	}
 
 }

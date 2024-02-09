@@ -16,4 +16,6 @@ public interface InspectionLotService {
 	List<InspectionLot> getInspectionLotForProccess();
 	
 	List<MaterialCharacteristic> getNonRecordedCharId(Integer id);
+	
+	List<InspectionLot> getCompleted();
 }
