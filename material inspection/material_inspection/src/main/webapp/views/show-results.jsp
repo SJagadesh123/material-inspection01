@@ -32,7 +32,6 @@
         <th>Start Date</th>
         <th>End Date</th>
         <th>Result</th>
-        <th>Remarks</th>
         <th>User</th>
         
         <th>Action</th>
@@ -52,11 +51,10 @@
 				<td>${inspection.inspStartDate}</td>
 				<td>${inspection.inspEndDate}</td>
 				<td>${inspection.inspectionResult}</td>
-				<td>${inspection.inspectionRemarks}</td>
 				<td>${inspection.user.userName}</td>
 				
 				<td class="action-links">
-				<a class="view-project" href="/material-inspection/vendor/edit/id=${inspection.inspectionLotId}">view</a>
+				<a class="view-project" href="/material-inspection/inspection/show/id=${inspection.inspectionLotId}">view</a>
 <%--             <a class="add-project" href="/material-inspection/vendor/show-char/id=${vendor.getVendorId()}">Delete</a>
  --%>            
 			</tr>

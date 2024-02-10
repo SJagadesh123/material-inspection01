@@ -1,7 +1,0 @@
-package com.zettamine.mi.service;
-
-public interface UserService {
-	
-	boolean validateUser(User user);
-
-}

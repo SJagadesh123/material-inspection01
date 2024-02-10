@@ -4,12 +4,13 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.zettamine.mi.entities.InspectionActual;
 import com.zettamine.mi.entities.InspectionLot;
 import com.zettamine.mi.entities.Material;
 import com.zettamine.mi.entities.MaterialCharacteristic;
@@ -60,12 +61,16 @@ public class InspectionLotServiceImpl implements InspectionLotService {
 
 		Users user = new Users();
 
-		user.setUserId(102);
+		user.setUserId(1002);
 		user.setUserName("System");
 
 		List<InspectionLot> inspectionLot = new ArrayList<InspectionLot>();
 
-		Set<Integer> id = inspectionActualRepo.findPassedInspectionLotId();
+		List<Integer> id = inspectionActualRepo.findPassedInspectionLotId();
+
+		Map<Integer, Long> idMap = id.stream().collect(Collectors.groupingBy(n -> n, Collectors.counting()));
+
+		System.out.println(id);
 
 		Date endDate = Date.valueOf(LocalDate.now());
 
@@ -76,9 +81,8 @@ public class InspectionLotServiceImpl implements InspectionLotService {
 				inspectionLot.add(lot);
 			} else if (inspectionActualRepo.findCountByInspectionLot(lot.getInspectionLotId()) == charSize) {
 
-				if (lot.getInspectionResult() == null && id.contains(lot.getInspectionLotId())) {
-					// InspectionLot(Integer, Material, Vendor, Plant, Date, Date, Date, String,
-					// String, Users, List<InspectionActual>)
+				if (lot.getInspectionResult() == null && id.contains(lot.getInspectionLotId()) && charSize == idMap.get(lot.getInspectionLotId())) {
+
 					InspectionLot ispLot = new InspectionLot(lot.getInspectionLotId(), lot.getMaterial(),
 							lot.getVendor(), lot.getPlant(), lot.getInspCreatedDate(), lot.getInspStartDate(), endDate,
 							"pass", "no remarks", user, null);
@@ -122,13 +126,34 @@ public class InspectionLotServiceImpl implements InspectionLotService {
 		List<InspectionLot> inspectionLot = new ArrayList<InspectionLot>();
 
 		for (InspectionLot lot : listOfLot) {
-			
-				if (lot.getInspectionResult() != null) {
-					inspectionLot.add(lot);
+
+			if (lot.getInspectionResult() != null) {
+				inspectionLot.add(lot);
 
 			}
 		}
 
 		return inspectionLot;
 	}
+
+	@Override
+	public List<InspectionLot> getPendingLot() {
+
+		List<InspectionLot> listOfLot = inspectionLotRepo.findAll();
+
+		List<InspectionLot> pendingInspectionLot = new ArrayList<InspectionLot>();
+		for (InspectionLot lot : listOfLot) {
+			System.out.println(lot);
+			int charSize = lot.getMaterial().getCharacteristics().size();
+			if (inspectionActualRepo.findCountByInspectionLot(lot.getInspectionLotId()) == charSize) {
+				if (lot.getInspectionResult() == null) {
+					pendingInspectionLot.add(lot);
+
+				}
+			}
+		}
+
+		return pendingInspectionLot;
+	}
+
 }

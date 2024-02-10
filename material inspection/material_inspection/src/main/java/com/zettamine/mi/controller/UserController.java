@@ -32,7 +32,8 @@ public class UserController {
 
 		System.out.println(user);
 		if (userService.validateUser(user)) {
-			session.setAttribute("user", user);
+			Users user1 = userService.getUser(user);
+			session.setAttribute("user", user1);
 			return "home-page";
 		}
 		model.addAttribute("message", "Please enter valid credentials");

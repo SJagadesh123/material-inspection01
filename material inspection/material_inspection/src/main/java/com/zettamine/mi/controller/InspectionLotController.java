@@ -1,5 +1,6 @@
 package com.zettamine.mi.controller;
 
+import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,12 +17,15 @@ import com.zettamine.mi.entities.InspectionLot;
 import com.zettamine.mi.entities.Material;
 import com.zettamine.mi.entities.MaterialCharacteristic;
 import com.zettamine.mi.entities.Plant;
+import com.zettamine.mi.entities.Users;
 import com.zettamine.mi.entities.Vendor;
 import com.zettamine.mi.service.InspectionActualService;
 import com.zettamine.mi.service.InspectionLotService;
 import com.zettamine.mi.service.MaterialService;
 import com.zettamine.mi.service.PlantService;
 import com.zettamine.mi.service.VendorService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/material-inspection/inspection")
@@ -134,13 +138,59 @@ public class InspectionLotController {
 
 	@GetMapping("/results")
 	public String getCompletedLot(Model model) {
-		List<InspectionLot> inspectionLotForProccess = inspectionLotService.getCompleted();
+		List<InspectionLot> completedLot = inspectionLotService.getCompleted();
 
-		System.out.println(inspectionLotForProccess);
+		System.out.println(completedLot);
 		
-		model.addAttribute("inspection", inspectionLotForProccess);
+		model.addAttribute("inspection", completedLot);
 
 		return "show-results";
 	}
+	
+	@GetMapping("/pending")
+	public String getApprovalPending(Model model)
+	{
+		List<InspectionLot> pendingLot = inspectionLotService.getPendingLot();
+		
+		model.addAttribute("inspection", pendingLot);
+		
+		return "approval-pending";
+	}
+	
+	@GetMapping("/start-approval{id}")
+	public String getStartApproval(@PathVariable Integer id,Model model)
+	{
+		
+		InspectionLot inspectionLot = inspectionLotService.getByLotId(id);
+		
+		List<MaterialCharacteristic> characteristics = inspectionLot.getMaterial().getCharacteristics();
+		
+		
+		List<InspectionActual> inspectionActual = inspectionLot.getInspectionActual();
+		
+		
+		model.addAttribute("inspectionLot", inspectionLot);
+		model.addAttribute("characteristics", characteristics);
+		model.addAttribute("inspectionActual", inspectionActual);
+		
+		return "start-approval";
+	}
+	
+	@PostMapping("/add-approval")
+	public String addApproval(InspectionLot inspection, HttpSession session) {
+
+		System.err.println(inspection);
+		
+		inspection.setInspEndDate(Date.valueOf(LocalDate.now()));
+		
+		Users user = (Users) session.getAttribute("user");
+		inspection.setUser(user);
+
+		inspectionLotService.save(inspection);
+
+		return "redirect:pending";
+		
+	}
+	
 
 }
