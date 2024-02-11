@@ -1,0 +1,18 @@
+package com.zettamine.mi.model;
+
+import java.sql.Date;
+
+public class SearchCriteria {
+
+	private Integer lotId;
+	
+	private Integer materialId;
+	
+	private String plantId;
+	
+	private Date startDate;
+	
+	private Date endtDate;
+	
+	private String status;
+}

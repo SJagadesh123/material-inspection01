@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=material_inspection/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.zettamine.mi.service{UserService.java[UserService" modifiers="513" timestamp="1706953273190"/>
+    <typeInfo handle="=material_inspection/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.zettamine.mi.service{UserService.java[UserService" modifiers="513" timestamp="1707589375757"/>
     <typeInfo handle="=material_inspection/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.zettamine.mi.service{VendorService.java[VendorService" modifiers="513" timestamp="1707048901231"/>
     <typeInfo handle="=material_inspection/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.zettamine.mi.repository{VendorRepository.java[VendorRepository" modifiers="513" timestamp="1707048984787"/>
     <typeInfo handle="=material_inspection/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.zettamine.mi.service{PlantService.java[PlantService" modifiers="513" timestamp="1707322863929"/>

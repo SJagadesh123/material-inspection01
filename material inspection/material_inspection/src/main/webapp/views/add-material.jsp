@@ -27,7 +27,8 @@ h3 {
 
 
 <body>
-
+	<c:choose>
+		<c:when test="${materialById eq null}">
 			<form:form action="add-material" method="post" class="form"
 				modelAttribute="material">
 				<h3>Add Material</h3>
@@ -47,13 +48,15 @@ h3 {
 
 					<tr>
 						<td><label>Material Type *</label></td>
-						<td><form:input type="text" required="required" path="materialType" /></td>
+						<td><form:input type="text" required="required"
+								path="materialType" /></td>
 
 					</tr>
-					
+
 					<tr>
 						<td><label>No of Characteristics *</label></td>
-						<td><form:input type="text" required="required" path="noOfChar" /></td>
+						<td><form:input type="text" required="required"
+								path="noOfChar" /></td>
 
 					</tr>
 
@@ -68,7 +71,52 @@ h3 {
 
 
 			</form:form>
-		
+		</c:when>
+		<c:otherwise>
+			<form:form action="add-material" method="post" class="form"
+				modelAttribute="materialById">
+				<h3>Add Material</h3>
+
+				<table>
+					<tr>
+						<td><label>Material Id *</label></td>
+						<td><form:input type="hidden" path="materialId"
+								required="required" value="${materialById.materialId}"/></td>
+
+					</tr>
+					<tr>
+						<td><label>Description *</label></td>
+						<td><form:input type="text" path="description"
+								required="required" readonly="readonly" value="${materialById.description}" /></td>
+					</tr>
+
+					<tr>
+						<td><label>Material Type *</label></td>
+						<td><form:input type="hidden" required="required"
+								path="materialType" value="${materialById.materialType}" /></td>
+
+					</tr>
+
+					<tr>
+						<td><label>No of Characteristics *</label></td>
+						<td><form:input type="text" required="required"
+								path="noOfChar" /></td>
+
+					</tr>
+
+					<tr>
+						<td><button type="submit">Add</button></td>
+						<td><button type="reset">Reset</button></td>
+						<td><button type="button"
+								onclick="window.location.href='/material-inspection/material'">Cancel</button></td>
+					</tr>
+
+				</table>
+
+
+			</form:form>
+		</c:otherwise>
+	</c:choose>
 
 </body>
 </html>

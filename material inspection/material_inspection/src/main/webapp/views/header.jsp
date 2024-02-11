@@ -11,6 +11,34 @@
 
 <link rel="stylesheet" href="/css/header.css">
 
+<style>
+body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #000080;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           
+        }
+
+        #logo {
+            margin-right: auto;
+        }
+
+        #home-logout {
+            margin-left: auto;
+        }
+
+
+</style>
+
 </head>
 
 <body>
@@ -20,10 +48,10 @@
 
 		</div>
 		<div id="home-logout">
-			<a href="/material-inspection/home-page">Home</a> 
+			<a href="/material-inspection/home-page" style="color:white; margin-right:24px;">Home</a> 
 			
 		</div>
-		<form action="logout"><input type="submit" value="logout"></form>
+		<button type="button" onclick="window.location.href='/material-inspection/logout'">Logout</button>
 	</nav>
 
 

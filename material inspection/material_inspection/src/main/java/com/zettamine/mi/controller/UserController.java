@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/")
+	@GetMapping({"/","/logout"})
 	public String showUserForm(Model model) {
 		model.addAttribute("user", new Users());
 		
@@ -30,6 +30,8 @@ public class UserController {
 	@PostMapping("/login")
 	public String processUser(@ModelAttribute("user") Users user, Model model, HttpSession session) {
 
+		
+		
 		System.out.println(user);
 		if (userService.validateUser(user)) {
 			Users user1 = userService.getUser(user);

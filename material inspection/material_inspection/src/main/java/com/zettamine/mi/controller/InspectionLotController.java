@@ -3,6 +3,7 @@ package com.zettamine.mi.controller;
 import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.zettamine.mi.entities.MaterialCharacteristic;
 import com.zettamine.mi.entities.Plant;
 import com.zettamine.mi.entities.Users;
 import com.zettamine.mi.entities.Vendor;
+import com.zettamine.mi.model.SearchCriteria;
 import com.zettamine.mi.service.InspectionActualService;
 import com.zettamine.mi.service.InspectionLotService;
 import com.zettamine.mi.service.MaterialService;
@@ -191,6 +193,71 @@ public class InspectionLotController {
 		return "redirect:pending";
 		
 	}
+	
+	@GetMapping("/show-completed-details/id={id}")
+	public String getCompleteDetails(@PathVariable Integer id,Model model)
+	{
+		
+		InspectionLot inspectionLot = inspectionLotService.getByLotId(id);
+		
+		List<MaterialCharacteristic> characteristics = inspectionLot.getMaterial().getCharacteristics();
+		
+		
+		List<InspectionActual> inspectionActual = inspectionLot.getInspectionActual();
+		
+		
+		model.addAttribute("inspection", inspectionLot);
+		model.addAttribute("characteristics", characteristics);
+		model.addAttribute("inspectionActual", inspectionActual);
+		
+		return "view-details";
+	}
+	
+	@GetMapping("/search")
+	public String getSearchPage(Model model)
+	{
+		
+		model.addAttribute("searchCriteria", new SearchCriteria());
+		model.addAttribute("inspection", new InspectionLot());
+		model.addAttribute("material", new Material());
+		model.addAttribute("plant", new Plant());
+		model.addAttribute("plant", new Plant());
+		
+		return "search-page";
+	}
+	
+	@PostMapping("/search-lot")
+	public String searchForm(SearchCriteria criteria, Model model)
+	{
+		System.out.println(criteria);
+		LocalDate startDate = criteria.getStartDate().toLocalDate();
+		LocalDate endDate = criteria.getEndDate().toLocalDate();
+		
+		long diff = ChronoUnit.DAYS.between(startDate, endDate);
+		
+		if(diff>90)
+		{
+			model.addAttribute("error", "the date range should be 90 days or less");
+			return getSearchPage(model);
+		}
+
+		criteria.setMaterialId(criteria.getMaterialId().isBlank() ? null : criteria.getMaterialId());
+		criteria.setPlantId(criteria.getPlantId().isBlank() ? null : criteria.getPlantId());
+		criteria.setStatus(criteria.getStatus().isBlank() ? null : criteria.getStatus());
+		
+		System.out.println(criteria);
+		
+		List<InspectionLot> inspectionLot = inspectionLotService.getBySearchCriteria(criteria);
+		
+		System.err.println(inspectionLot);
+		
+		model.addAttribute("inspection", inspectionLot);
+		
+		return "search-result";
+		
+	}
+	
+	
 	
 
 }

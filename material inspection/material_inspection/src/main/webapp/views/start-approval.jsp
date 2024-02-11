@@ -125,9 +125,9 @@ h3 {
 			<tr>
 				<td><label>Result</label></td>
 				<td><form:select path="inspectionResult" style="width: 170px; padding: 5px;" >
-						<option selected disabled>Select Character</option>
-						<form:option value="Pass">Pass</form:option>
-						<form:option value="Fail">Fail</form:option>
+						<option selected disabled>Select Result</option>
+						<form:option value="pass">Pass</form:option>
+						<form:option value="fail">Fail</form:option>
 					</form:select></td>
 			</tr>
 

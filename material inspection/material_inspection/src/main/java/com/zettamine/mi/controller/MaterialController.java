@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zettamine.mi.entities.Material;
 import com.zettamine.mi.entities.MaterialCharacteristic;
+import com.zettamine.mi.entities.Vendor;
 import com.zettamine.mi.service.MaterialService;
 
 @Controller
@@ -35,7 +36,7 @@ public class MaterialController {
 		return "add-material";
 	}
 
-	@PostMapping({ "/add-material", "/edit/add-material" })
+	@PostMapping({ "/add-material", "/add-char/add-material" })
 	public String addMaterial(Material material, RedirectAttributes redirectAttributes) {
 		System.out.println(material);
 		
@@ -80,7 +81,7 @@ public class MaterialController {
 	}
 	
 	@GetMapping("/show-char/id={id}")
-	public String editPlant(@PathVariable("id") String id, Model model)
+	public String showCharacteristics(@PathVariable("id") String id, Model model)
 	{
 		Material material = materialService.getByMaterialId(id);
 		
@@ -91,4 +92,13 @@ public class MaterialController {
 		return "show-materialChar";
 	}
 	
+	@GetMapping("/add-char/id={id}")
+	public String editChar(@PathVariable("id") String id, Model model)
+	{
+		 Material material = materialService.getByMaterialId(id);
+		
+		model.addAttribute("materialById", material);
+		
+		return "add-material";
+	}
 }

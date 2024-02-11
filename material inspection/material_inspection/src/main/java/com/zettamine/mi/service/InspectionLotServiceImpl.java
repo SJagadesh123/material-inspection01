@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import com.zettamine.mi.entities.InspectionLot;
 import com.zettamine.mi.entities.Material;
 import com.zettamine.mi.entities.MaterialCharacteristic;
 import com.zettamine.mi.entities.Users;
+import com.zettamine.mi.model.SearchCriteria;
 import com.zettamine.mi.repository.InspectionActualRepository;
 import com.zettamine.mi.repository.InspectionLotRepository;
 
@@ -81,7 +83,8 @@ public class InspectionLotServiceImpl implements InspectionLotService {
 				inspectionLot.add(lot);
 			} else if (inspectionActualRepo.findCountByInspectionLot(lot.getInspectionLotId()) == charSize) {
 
-				if (lot.getInspectionResult() == null && id.contains(lot.getInspectionLotId()) && charSize == idMap.get(lot.getInspectionLotId())) {
+				if (lot.getInspectionResult() == null && id.contains(lot.getInspectionLotId())
+						&& charSize == idMap.get(lot.getInspectionLotId())) {
 
 					InspectionLot ispLot = new InspectionLot(lot.getInspectionLotId(), lot.getMaterial(),
 							lot.getVendor(), lot.getPlant(), lot.getInspCreatedDate(), lot.getInspStartDate(), endDate,
@@ -155,5 +158,70 @@ public class InspectionLotServiceImpl implements InspectionLotService {
 
 		return pendingInspectionLot;
 	}
+
+	@Override
+	public List<InspectionLot> getBySearchCriteria(SearchCriteria criteria) {
+
+		List<InspectionLot> inspectionLot = inspectionLotRepo.findByInspStartDateBetween(criteria.getStartDate(), criteria.getEndDate());
+
+		System.err.println(criteria);
+		System.err.println(inspectionLot);
+		
+		Stream<InspectionLot> stream = inspectionLot.stream();
+
+		
+		if (criteria.getMaterialId() != null) {
+			System.out.println("111111111111");
+			stream = stream.filter(n -> n.getMaterial().getMaterialId().equalsIgnoreCase(criteria.getMaterialId()));
+		}
+		if (criteria.getVendorId() != null) {
+			System.out.println("2222222222222");
+			stream = stream.filter(n -> n.getVendor().getVendorId().equals(criteria.getVendorId()));
+		}
+		if (criteria.getPlantId() != null) {
+			System.out.println("33333333333333");
+			stream = stream.filter(n -> n.getPlant().getPlantId().equalsIgnoreCase(criteria.getPlantId()));
+		}
+		if (criteria.getStatus() != null) {
+	
+			System.out.println("33333333333333");
+			stream = stream.filter(n -> n.getInspectionResult()!=null).filter(n -> n.getInspectionResult().equalsIgnoreCase(criteria.getStatus()));
+		}
+
+	System.err.println(stream);
+		
+		return stream.collect(Collectors.toList());
+	}
+
+	/*
+	 * @Override public List<InspectionLot> getBySearchCriteria(InspectionLot
+	 * inspection) {
+	 * 
+	 * String query = "select * from isp_lot where insp_start_date>=" +
+	 * inspection.getInspStartDate() + " and insp_start_date <=" +
+	 * inspection.getInspEndDate();
+	 * 
+	 * if (inspection.getMaterial().getMaterialId() != null ||
+	 * !inspection.getMaterial().getMaterialId().isBlank()) { query = query +
+	 * " and material_id = '" +
+	 * inspection.getMaterial().getMaterialId().toUpperCase() + "'"; }
+	 * 
+	 * if (inspection.getPlant().getPlantId() != null ||
+	 * !inspection.getPlant().getPlantId().isBlank()) { query = query +
+	 * " and plant_id = '" + inspection.getPlant().getPlantId().toUpperCase() + "'";
+	 * }
+	 * 
+	 * if (inspection.getVendor().getVendorId() != null) { query = query +
+	 * " and vendor_id = " + inspection.getVendor().getVendorId(); }
+	 * 
+	 * if (inspection.getInspectionResult() != null ||
+	 * !inspection.getInspectionResult().isBlank()) { query = query +
+	 * " and status = '" + inspection.getInspectionResult().toLowerCase() + "'"; }
+	 * 
+	 * return inspectionLotRepo.getLotBySearchCriteria(query);
+	 * 
+	 * 
+	 * }
+	 */
 
 }

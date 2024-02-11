@@ -23,7 +23,8 @@
 		<li><a href="/material-inspection/inspection/new">Add Lot</a></li>
 		<li><a href="/material-inspection/inspection/process-isp">Process Inspection</a></li>
 		<li><a href="/material-inspection/inspection/pending">Approval Pending</a></li>
-		<li><a href="/material-inspection/inspection/results">Completed</a></li>
+		<li><a href="/material-inspection/inspection/results">Completed Lots</a></li>
+		<li><a href="/material-inspection/inspection/search">Search Lot</a></li>
 	</ul>
 
 </body>
