@@ -32,6 +32,7 @@ h3 {
 		modelAttribute="inspection">
 		<h3>Add Inspection Lot</h3>
 			<h5 style="color:red">${error }</h5>
+			<h5 style="color:green">${msg }</h5>
 		<table>
 			<tr>
 				<td><label> Material *</label></td>

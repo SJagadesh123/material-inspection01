@@ -5,33 +5,36 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zettamine.mi.constants.ViewNames;
+
 @Controller
 @RequestMapping("/material-inspection")
 public class HomePageController {
 
+	
 	@GetMapping("/home-page")
 	public String forwardToHome(Model model) {
-		return "home-page";
+		return ViewNames.HOME_PAGE;
 	}
 
 	@GetMapping("/vendor")
 	public String forwardToVendor(Model model) {
-		return "vendor";
+		return ViewNames.VENDOR;
 	}
 
 	@GetMapping("/plant")
 	public String forwardToPlant(Model model) {
-		return "plant";
+		return ViewNames.PLANT;
 	}
 
 	@GetMapping("/material")
 	public String forwardToVendorMaterial(Model model) {
-		return "material";
+		return ViewNames.MATERIAL;
 	}
 
 	@GetMapping("/inspection")
 	public String forwardInspection(Model model) {
-		return "inspection";
+		return ViewNames.INSPECTION;
 	}
 
 }

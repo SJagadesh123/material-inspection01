@@ -1,11 +1,13 @@
 package com.zettamine.mi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.zettamine.mi.entities.Vendor;
 import com.zettamine.mi.repository.VendorRepository;
+import com.zettamine.mi.utility.StringUtils;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -22,10 +24,10 @@ public class VendorServiceImpl implements VendorService {
 	@Override
 	public void save(Vendor vendor) {
 		Vendor newVendor = new Vendor(vendor.getVendorId(),
-								      vendor.getVendorName().toLowerCase(),
-									  vendor.getEmail().toLowerCase(), 
+								      StringUtils.trimSpacesBetween(vendor.getVendorName().toLowerCase()),
+								      StringUtils.trimSpacesBetween(vendor.getEmail().toLowerCase()), 
 									  vendor.getState().toLowerCase(), 
-									  vendor.getCity().toLowerCase(), 
+									  StringUtils.trimSpacesBetween(vendor.getCity().toLowerCase()), 
 									  vendor.getStatus().toLowerCase(),null);
 
 		vendorRepo.save(newVendor);
@@ -39,8 +41,21 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public Vendor getById(int id) {
+		Optional<Vendor> vendorbyId = vendorRepo.findById(id);
 		
-		return vendorRepo.findById(id).get();
+		if(vendorbyId.isPresent())
+		{
+			return vendorbyId.get();
+		}else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public boolean existByName(String vendorName) {
+		// TODO Auto-generated method stub
+		return vendorRepo.existsByVendorName(vendorName);
 	}
 
 }

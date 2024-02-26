@@ -11,4 +11,6 @@ public interface VendorService {
 	List<Vendor> getAll();
 	
 	Vendor getById(int id);
+	
+	boolean existByName(String vendorName);
 }

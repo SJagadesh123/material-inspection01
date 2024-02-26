@@ -43,7 +43,7 @@
 				<td>${vendor.getState()}</td>
 				<td class="action-links">
 				<a class="view-project" href="/material-inspection/vendor/edit/id=${vendor.getVendorId()}">Edit</a>
-            <a class="add-project" href="/material-inspection/vendor/show-char/id=${vendor.getVendorId()}">Delete</a>
+            <a class="add-project" href="/material-inspection/vendor/delete/id=${vendor.getVendorId()}">Delete</a>
             
 			</tr>
 			</c:forEach>	

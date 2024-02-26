@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="header.jsp"%>
 
@@ -33,18 +34,21 @@ h3 {
 			<form:form action="add-vendor" method="post" class="form"
 				modelAttribute="vendor">
 				<h3>Add Vendor</h3>
-
+				<h5 style="color: red">${error }</h5>
+				<h5 style="color: green">${msg}</h5>
 				<table>
 					<tr>
 						<td><label>Vendor Name *</label></td>
 						<td><form:input type="text" path="vendorName"
 								required="required" /></td>
-						<td><form:errors path="vendorName"></form:errors></td>
+
+						<td><form:errors style="display:inline; color:red;" path="vendorName"></form:errors></td>
 					</tr>
 					<tr>
 						<td><label>Vendor email *</label></td>
 						<td><form:input type="text" path="email" required="required" /></td>
-						<td><form:errors path="email"></form:errors></td>
+
+						<td><form:errors style="display:inline; color:red;" path="email"></form:errors></td>
 					</tr>
 
 
@@ -53,16 +57,18 @@ h3 {
 						<td><form:select path="state" required="required">
 								<option selected disabled>Select State</option>
 								<c:forEach var="state" items="${States.values()}">
-									<option value="${state.getStateName()}">${state}</option>
+									<option value="${state.getStateName()}">${state.getStateName()}</option>
 								</c:forEach>
 
 							</form:select></td>
-						<td><form:errors path="state"></form:errors></td>
+
+						<td><form:errors style="display:inline; color:red;" path="state"></form:errors></td>
 					</tr>
 					<tr>
 						<td><label>City *</label></td>
 						<td><form:input type="text" required="required" path="city" /></td>
-						<td><form:errors path="city"></form:errors></td>
+
+						<td><form:errors style="display:inline; color:red;" path="city"></form:errors></td>
 					</tr>
 
 					<tr>
@@ -81,7 +87,7 @@ h3 {
 			<form:form action="add-vendor" method="post" class="form"
 				modelAttribute="vendorById">
 				<h3>Update Vendor</h3>
-
+					
 				<table>
 					<tr>
 						<td><form:input type="hidden" path="vendorId"
@@ -91,11 +97,15 @@ h3 {
 						<td><label>Vendor Name *</label></td>
 						<td><form:input type="text" path="vendorName"
 								required="required" value="${vendorById.getVendorName()}" /></td>
+						<td><form:errors style="display:inline; color:red;" path="vendorName"></form:errors></td>
+
 					</tr>
 					<tr>
 						<td><label>Vendor email *</label></td>
 						<td><form:input type="text" path="email" required="required"
 								value="${vendorById.getEmail()}" /></td>
+						<td><form:errors style="display:inline; color:red;" path="email"></form:errors></td>
+
 
 					</tr>
 
@@ -105,15 +115,18 @@ h3 {
 						<td><form:select path="state" required="required">
 								<option selected>${vendorById.getState()}</option>
 								<c:forEach var="state" items="${States.values()}">
-									<option value="${state.getStateName()}">${state}</option>
+									<option value="${state.getStateName()}">${state.getStateName()}</option>
 								</c:forEach>
 
 							</form:select></td>
+						<td><form:errors style="display:inline; color:red;" path="state"></form:errors></td>
+
 					</tr>
 					<tr>
 						<td><label>City *</label></td>
 						<td><form:input type="text" required="required" path="city"
 								value="${vendorById.getCity()}" /></td>
+						<td><form:errors style="display:inline; color:red;" path="city"></form:errors></td>
 
 					</tr>
 

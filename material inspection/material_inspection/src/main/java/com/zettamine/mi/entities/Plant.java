@@ -7,6 +7,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,13 @@ import lombok.ToString;
 public class Plant {
 
 	@Id
+	@NotBlank(message = "* required")
 	private String plantId;
+	@NotBlank(message = "* required")
 	private String plantName;
+	@NotBlank(message = "* required")
 	private String city;
+	@NotBlank(message = "* required")
 	private String state;
 	private String status = "active";
 	

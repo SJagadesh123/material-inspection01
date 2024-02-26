@@ -54,7 +54,7 @@
 				<td>${inspection.user.userName}</td>
 				
 				<td class="action-links">
-				<a class="view-project" href="/material-inspection/inspection/show-completed-details/id=${inspection.inspectionLotId}">view</a>
+				<a class="view-project" href="/material-inspection/inspection/show-details/id=${inspection.inspectionLotId}">view</a>
 <%--             <a class="add-project" href="/material-inspection/vendor/show-char/id=${vendor.getVendorId()}">Delete</a>
  --%>            
 			</tr>

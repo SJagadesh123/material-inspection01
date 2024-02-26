@@ -33,18 +33,25 @@ h3 {
 			<form:form action="add-plant" method="post" class="form"
 				modelAttribute="plant">
 				<h3>Add Plant</h3>
-
+				<h5 style="color: red">${error }</h5>
+				<h5 style="color: green">${msg}</h5>
 				<table>
 					<tr>
 						<td><label>Plant Id *</label></td>
 						<td><form:input type="text" path="plantId"
-								required="required"/></td>
+								required="required" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="plantId"></form:errors></td>
+
 
 					</tr>
 					<tr>
 						<td><label>Plant Name *</label></td>
 						<td><form:input type="text" path="plantName"
 								required="required" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="plantName"></form:errors></td>
+
 					</tr>
 
 					<tr>
@@ -52,14 +59,19 @@ h3 {
 						<td><form:select path="state" required="required">
 								<option selected disabled>Select State</option>
 								<c:forEach var="state" items="${States.values()}">
-									<option value="${state.getStateName()}">${state}</option>
+									<option value="${state.getStateName()}">${state.getStateName()}</option>
 								</c:forEach>
 
 							</form:select></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="state"></form:errors></td>
+
 					</tr>
 					<tr>
 						<td><label>City *</label></td>
 						<td><form:input type="text" required="required" path="city" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="city"></form:errors></td>
 
 					</tr>
 
@@ -84,13 +96,16 @@ h3 {
 					<tr>
 						<td><label>Plant Id *</label></td>
 						<td><form:input type="text" path="plantId"
-								required="required" value="${plantById.getPlantId()}"/></td>
-
+								required="required" value="${plantById.getPlantId()}" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="plantId"></form:errors></td>
 					</tr>
 					<tr>
 						<td><label>Vendor Name *</label></td>
 						<td><form:input type="text" path="plantName"
 								required="required" value="${plantById.getPlantName()}" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="plantName"></form:errors></td>
 					</tr>
 
 
@@ -100,15 +115,19 @@ h3 {
 						<td><form:select path="state" required="required">
 								<option selected>${plantById.getState()}</option>
 								<c:forEach var="state" items="${States.values()}">
-									<option value="${state.getStateName()}">${state}</option>
+									<option value="${state.getStateName()}">${state.getStateName()}</option>
 								</c:forEach>
 
 							</form:select></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="state"></form:errors></td>
 					</tr>
 					<tr>
 						<td><label>City *</label></td>
 						<td><form:input type="text" required="required" path="city"
 								value="${plantById.getCity()}" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="city"></form:errors></td>
 
 					</tr>
 

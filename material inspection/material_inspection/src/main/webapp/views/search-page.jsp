@@ -45,7 +45,7 @@ h3 {
 			</tr>
 			<tr>
 				<td><label>Vendor Id</label></td>
-				<td><form:input type="text" path="vendorId" /></td>
+				<td><form:input type="number" path="vendorId" /></td>
 
 			</tr>
 			<tr>
@@ -65,7 +65,7 @@ h3 {
 			</tr>
 
 			<tr>
-				<td><button type="submit">Add</button></td>
+				<td><button type="submit">Search</button></td>
 				<td><button type="reset">Reset</button></td>
 				<td><button type="button"
 						onclick="window.location.href='/material-inspection/inspection'">Cancel</button></td>

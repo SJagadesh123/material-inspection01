@@ -31,7 +31,7 @@ h3 {
 	<form:form action="add-Characteristic" method="post" class="form"
 		modelAttribute="material">
 		<h3>Add Characteristic</h3>
-
+			<h5 style="color: red">${error }</h5>
 		<table>
 			<tr>
 				<td><form:input type="hidden" path="materialId"

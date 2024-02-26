@@ -32,32 +32,39 @@ h3 {
 			<form:form action="add-material" method="post" class="form"
 				modelAttribute="material">
 				<h3>Add Material</h3>
-
+				<h5 style="color: red">${error }</h5>
+				<h5 style="color: green">${msg}</h5>
 				<table>
 					<tr>
 						<td><label>Material Id *</label></td>
 						<td><form:input type="text" path="materialId"
 								required="required" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="materialId"></form:errors></td>
 
 					</tr>
 					<tr>
 						<td><label>Description *</label></td>
 						<td><form:input type="text" path="description"
 								required="required" /></td>
+						<td><form:errors style="display:inline; color:red;"
+								path="description"></form:errors></td>
 					</tr>
 
 					<tr>
 						<td><label>Material Type *</label></td>
 						<td><form:input type="text" required="required"
 								path="materialType" /></td>
-
+						<td><form:errors style="display:inline; color:red;"
+								path="materialType"></form:errors></td>
 					</tr>
 
 					<tr>
 						<td><label>No of Characteristics *</label></td>
-						<td><form:input type="text" required="required"
+						<td><form:input type="number" required="required"
 								path="noOfChar" /></td>
-
+						<td><form:errors style="display:inline; color:red;"
+								path="noOfChar"></form:errors></td>
 					</tr>
 
 					<tr>
@@ -75,23 +82,23 @@ h3 {
 		<c:otherwise>
 			<form:form action="add-material" method="post" class="form"
 				modelAttribute="materialById">
-				<h3>Add Material</h3>
-
+				<h3>Add Characteristics</h3>
+				<h5 style="color: red">${error }</h5>
+				<h5 style="color: green">${msg}</h5>
 				<table>
 					<tr>
-						<td><label>Material Id *</label></td>
+						
 						<td><form:input type="hidden" path="materialId"
-								required="required" value="${materialById.materialId}"/></td>
-
+								required="required" value="${materialById.materialId}" /></td>
 					</tr>
 					<tr>
 						<td><label>Description *</label></td>
 						<td><form:input type="text" path="description"
-								required="required" readonly="readonly" value="${materialById.description}" /></td>
+								required="required" readonly="readonly"
+								value="${materialById.description}" /></td>
 					</tr>
 
 					<tr>
-						<td><label>Material Type *</label></td>
 						<td><form:input type="hidden" required="required"
 								path="materialType" value="${materialById.materialType}" /></td>
 
@@ -99,9 +106,10 @@ h3 {
 
 					<tr>
 						<td><label>No of Characteristics *</label></td>
-						<td><form:input type="text" required="required"
+						<td><form:input type="number" required="required"
 								path="noOfChar" /></td>
-
+						<td><form:errors style="display:inline; color:red;"
+								path="noOfChar"></form:errors></td>
 					</tr>
 
 					<tr>

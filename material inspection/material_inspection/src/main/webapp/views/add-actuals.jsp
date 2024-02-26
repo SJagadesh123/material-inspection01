@@ -41,7 +41,7 @@ h3 {
 
 
 				<td><h4>${material.description}</h4></td>
-				
+																
 			</tr>
 			
 			<tr>
@@ -50,7 +50,7 @@ h3 {
 						required="required">
 						<option selected disabled>Select Character</option>
 						<c:forEach var="insp" items="${characteristics}">
-								<option value="${insp.chId }">${insp.chDesc }</option>
+								<option value="${insp.chId }">${insp.chDesc } in ${insp.uom}</option>
 						</c:forEach>
 					</form:select></td>
 			</tr>

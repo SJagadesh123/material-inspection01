@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.zettamine.mi.entities.Plant;
 import com.zettamine.mi.repository.PlantRepository;
+import com.zettamine.mi.utility.StringUtils;
 
 @Service
 public class PlantServiceImpl implements PlantService {
@@ -20,9 +21,9 @@ public class PlantServiceImpl implements PlantService {
 
 	@Override
 	public void save(Plant plant) {
-		Plant newPlant = new Plant(plant.getPlantId(), 
-								   plant.getPlantName().toLowerCase(), 
-								   plant.getCity().toLowerCase(), 
+		Plant newPlant = new Plant( StringUtils.trimSpacesBetween(plant.getPlantId()).toUpperCase(), 
+				 StringUtils.trimSpacesBetween(plant.getPlantName().toLowerCase()), 
+				 StringUtils.trimSpacesBetween(plant.getCity().toLowerCase()), 
 								   plant.getState().toLowerCase(), 
 								   plant.getStatus().toLowerCase(),null);
 		

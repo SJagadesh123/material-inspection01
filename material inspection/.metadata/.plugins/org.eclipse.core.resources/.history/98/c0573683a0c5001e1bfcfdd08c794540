@@ -1,7 +1,0 @@
-package com.zettamine.mi.service;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface InspectionActuals extends JpaRepository<T, ID> {
-
-}
