@@ -17,6 +17,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,14 +38,24 @@ public class MaterialCharacteristic {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mat_chr_sequence")
     @SequenceGenerator(name = "mat_chr_sequence", sequenceName = "mat_chr_sequence", allocationSize = 1, initialValue = 101)
 	private Integer chId;
+	
+	@NotBlank(message = "* required")
+	@Pattern(regexp = "^[a-zA-Z\\s]*$", message = "*provide valid name")
 	private String chDesc;
+	
+	@NotBlank(message = "* required")
+	@Pattern(regexp = "^[a-zA-Z\\s]*$", message = "*provide valid unit of measurement")
 	private String uom;
 
 	@Column(name = "tol_ul")
-	private double upperLimit;
+	@NotNull
+	@Min(value = 0, message = "Upper limit must be greater than 0")
+	private Double upperLimit;
 
 	@Column(name = "tol_ll")
-	private double lowerLimit;
+	@NotNull
+	@Min(value = 0, message = "Lower limit must be greater than 0")
+	private Double lowerLimit;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "material_id")

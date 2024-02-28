@@ -20,6 +20,8 @@ import com.zettamine.mi.entities.MaterialCharacteristic;
 import com.zettamine.mi.service.MaterialService;
 import com.zettamine.mi.utility.StringUtils;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/material-inspection")
 public class MaterialController {
@@ -34,7 +36,7 @@ public class MaterialController {
 	}
 
 	@PostMapping("/material")
-	public ResponseEntity<String> addMaterial(@RequestBody Material material) {
+	public ResponseEntity<String> addMaterial(@Valid @RequestBody Material material) {
 
 		if (materialService
 				.getByMaterialId(StringUtils.removeAllSpaces(material.getMaterialId().toUpperCase())) != null) {
@@ -49,31 +51,44 @@ public class MaterialController {
 		}
 
 		LOG.info("Material added succesfully");
-		return ResponseEntity.status(HttpStatus.OK).body("Redirected to add Characteristics page");
+		return ResponseEntity.status(HttpStatus.OK).body("Material added succesfully");
 	}
 
 	@PostMapping("/characteristic/{id}")
-	public ResponseEntity<?> addCharacteristic(@RequestBody List<MaterialCharacteristic> characteristics,
+	public ResponseEntity<?> addCharacteristic(@Valid @RequestBody List<MaterialCharacteristic> characteristics,
 			@PathVariable("id") String id) {
 
 		Optional<Material> materialOpt = materialService.getByMaterialId(id);
 
 		if (materialOpt.isEmpty()) {
-			LOG.info("Material not present with id: " + id);
+			LOG.info("Material not present with id: {}", id);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Material not present with id: " + id);
 		} else {
 			Material material = materialOpt.get();
 			for (MaterialCharacteristic matCh : characteristics) {
+				if (matCh.getLowerLimit() >= matCh.getUpperLimit()) {
+					LOG.warn(
+							"Lower limit must not be greater than Upper limit for characteristic: {}. Please try again!!",
+							matCh.getChDesc());
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+							.body(" Lower limit must not be greater than Upper limit for \"" + matCh.getChDesc()
+									+ "\" Please try again!!");
+				}
+				if (matCh.getUpperLimit() == 0 || matCh.getLowerLimit() == 0) {
+					LOG.warn("Limits must not be zero for characteristic: {}. Please try again!!", matCh.getChDesc());
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+							.body("Limits must not be zero for \"" + matCh.getChDesc() + "\" Please try again!!");
+				}
 				matCh.setMaterial(material);
 			}
-			
+
 			material.setCharacteristics(characteristics);
 			try {
 				materialService.save(material);
-				LOG.info("Characteristics added successfully for material with id: " + id);
+				LOG.info("Characteristics added successfully for material with id: {}", id);
 				return ResponseEntity.status(HttpStatus.OK).body("Characteristics added successfully");
 			} catch (Exception e) {
-				LOG.error("Error occurred while adding characteristics for material with id: " + id, e);
+				LOG.error("Error occurred while adding characteristics for material with id: {}", id, e);
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate characteristics are not allowed");
 			}
 		}
@@ -102,5 +117,4 @@ public class MaterialController {
 		}
 	}
 
-	
 }

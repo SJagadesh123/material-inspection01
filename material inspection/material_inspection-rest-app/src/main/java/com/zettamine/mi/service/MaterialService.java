@@ -1,11 +1,8 @@
 package com.zettamine.mi.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import org.springframework.dao.DataIntegrityViolationException;
 
 import com.zettamine.mi.entities.Material;
 

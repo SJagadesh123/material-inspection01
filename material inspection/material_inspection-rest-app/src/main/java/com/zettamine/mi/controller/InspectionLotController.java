@@ -5,11 +5,16 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zettamine.mi.constants.ViewNames;
@@ -19,7 +24,6 @@ import com.zettamine.mi.entities.Material;
 import com.zettamine.mi.entities.MaterialCharacteristic;
 import com.zettamine.mi.entities.Plant;
 import com.zettamine.mi.entities.Users;
-import com.zettamine.mi.entities.Vendor;
 import com.zettamine.mi.model.SearchCriteria;
 import com.zettamine.mi.service.InspectionActualService;
 import com.zettamine.mi.service.InspectionLotService;
@@ -30,10 +34,11 @@ import com.zettamine.mi.service.VendorService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/material-inspection/inspection")
+@RequestMapping("/material-inspection")
 public class InspectionLotController {
 
-	
+	private static final Logger LOG = LoggerFactory.getLogger(InspectionLotController.class);
+
 	private VendorService vendorService;
 	private MaterialService materialService;
 	private PlantService plantService;
@@ -51,51 +56,34 @@ public class InspectionLotController {
 		this.inspectionActualService = inspectionActualService;
 	}
 
-	@GetMapping("/new")
-	public String getNewInspectionLot(Model model) {
-		model.addAttribute("inspection", new InspectionLot());
-		List<Material> material = materialService.getAll();
-		List<Vendor> vendor = vendorService.getAll();
-		List<Plant> plant = plantService.getAll();
-
-		model.addAttribute("material", material);
-		model.addAttribute("vendor", vendor);
-		model.addAttribute("plant", plant);
-		return ViewNames.ADD_INSPECTION;
-	}
-
-	@PostMapping({ "/add-inspection" })
-	public String addInspection(InspectionLot inspection, Model model) {
+	@PostMapping("/inspection")
+	public ResponseEntity<String> addInspection(@RequestBody InspectionLot inspection) {
+		LOG.info("Received Inspection Lot: {}", inspection);
 
 		Date createdDate = inspection.getInspCreatedDate();
 		Date startDate = inspection.getInspStartDate();
 		LocalDate now = LocalDate.now();
 		Date currentDate = Date.valueOf(now);
-		
-		if(inspection.getMaterial().getCharacteristics().size()==0)
-		{
-			model.addAttribute("error", "Material has no chars");
 
-			return getNewInspectionLot(model);
+		if (inspection.getMaterial().getCharacteristics().isEmpty()) {
+			LOG.warn("Inspection material has no characteristics");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Material has no characteristics");
 		}
 
 		if (createdDate.compareTo(currentDate) > 0 || startDate.compareTo(currentDate) > 0) {
-			model.addAttribute("error", "* Date must be less than current date");
-
-			return getNewInspectionLot(model);
+			LOG.warn("Date must be less than current date");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Date must be less than current date");
 		}
 
 		if (createdDate.compareTo(startDate) > 0) {
-			model.addAttribute("error", "* start date must be greater than created date");
-
-			return getNewInspectionLot(model);
+			LOG.warn("Start date must be greater than created date");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Start date must be greater than created date");
 		}
 
 		inspectionLotService.save(inspection);
-		model.addAttribute("msg", "* Lot added succesfully");
+		LOG.info("Inspection Lot added successfully: {}", inspection);
 
-
-		return getNewInspectionLot(model);
+		return ResponseEntity.status(HttpStatus.OK).body("Inspection Lot added successfully");
 	}
 
 	@GetMapping("/process-isp")

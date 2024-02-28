@@ -31,13 +31,13 @@ public class InspectionLot {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "isp_lot_sequence")
     @SequenceGenerator(name = "isp_lot_sequence", sequenceName = "isp_lot_sequence", allocationSize = 1, initialValue = 4801)
 	private Integer inspectionLotId;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "material_id")
 	private Material material;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "vendor_id")
 	private Vendor vendor;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "plant_id")
 	private Plant plant;
 	private Date inspCreatedDate;

@@ -40,7 +40,7 @@ public class PlantController {
 
 		String plantId = StringUtils.removeAllSpaces(plant.getPlantId());
 		String plantName = StringUtils.removeAllSpaces(plant.getPlantName());
-		if (plantService.getByPlantId(plantId) != null) {
+		if (plantService.getByPlantId(plantId).isPresent()) {
 			LOG.info("Plant already exists with ID: {}", plantId);
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Plant already exists with ID " + plantId);
 		}
@@ -58,7 +58,7 @@ public class PlantController {
 	@PutMapping("/plant")
 	public ResponseEntity<?> updatePlant(@Valid Plant plant) {
 
-		if (plantService.getByPlantId(plant.getPlantId()) == null) {
+		if (plantService.getByPlantId(plant.getPlantId()).isEmpty()) {
 			LOG.info("No plant found with id: {}", plant.getPlantId());
 			return ResponseEntity.badRequest().body("No plant present with id : " + plant.getPlantId());
 		}
